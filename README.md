@@ -1,315 +1,165 @@
-# Real-Time Chat Application
+Real-Time Chat Application
+This project is a real-time chat application built using the MERN stack (MongoDB, Express.js, React, and Node.js) along with Socket.IO for instant communication.
+It supports public chat rooms, private rooms with access codes, file and image sharing, and secure user authentication.
+Both backend and frontend are organized as separate applications inside the same project folder.
 
-A full-stack real-time chat application built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring WebSocket communication for instant messaging, chat rooms, and media sharing capabilities.
+Features
+Real-Time Messaging
 
-##  Features
+Messages are delivered instantly using WebSockets without refreshing the page.
 
-- **Real-time Messaging**: Instant message delivery using WebSockets (Socket.io)
-- **Chat Rooms**: Create and join different chat rooms for group conversations
-- **Private Conversations**: One-on-one messaging between users
-- **Media Sharing**: Send images and files in conversations
-- **Message Persistence**: All messages are saved in MongoDB for chat history
-- **User Authentication**: Secure login and registration system
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+Public Chat Rooms
 
-##  Tech Stack
+Users can join any public room immediately and start chatting.
 
-**Frontend:**
-- React.js (v18.2.0)
-- Socket.io-client (v4.6.0)
-- Axios (v1.6.0)
-- React Router DOM (v6.20.0)
-- CSS3 / Styled Components
+Private Rooms with Codes
 
-**Backend:**
-- Node.js (v18.x or higher)
-- Express.js (v4.18.0)
-- Socket.io (v4.6.0)
-- MongoDB (v6.0 or higher)
-- Mongoose (v8.0.0)
+Users can create private rooms that generate a unique 6-character code.
+Anyone who has this code can join the room.
 
-**Authentication:**
-- JSON Web Tokens (JWT)
-- bcrypt.js
+Media Sharing
 
-##  Prerequisites
+Users can upload and send images or files.
+Uploaded media is stored using Cloudinary.
 
-Before you begin, ensure you have the following installed on your system:
+Message History
 
-- **Node.js**: v18.x or higher ([Download here](https://nodejs.org/))
-- **npm**: v9.x or higher (comes with Node.js)
-- **MongoDB**: v6.0 or higher ([Download here](https://www.mongodb.com/try/download/community))
-  - Or use MongoDB Atlas (cloud database)
-- **Git**: For cloning the repository
+All chat messages are stored in MongoDB and can be viewed later.
 
-To check your versions:
-```bash
-node --version
-npm --version
-mongo --version
-```
+Authentication
 
-## 🔧 Installation & Setup
+Registration and login are implemented using JWT-based authentication.
 
-### 1. Clone the Repository
+Responsive UI
 
-```bash
-git clone https://github.com/yourusername/chat-application.git
-cd chat-application
-```
+The frontend layout adapts smoothly to desktop, tablet, and mobile screens.
 
-### 2. Backend Setup
+Tech Stack
+Frontend
 
-```bash
-# Navigate to backend directory
+React.js
+
+Axios
+
+Socket.IO Client
+
+CSS
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB + Mongoose
+
+Socket.IO
+
+Cloudinary (for media uploads)
+
+Project Structure
+chat_assignment/
+  backend/
+    config/
+    controllers/
+    middleware/
+    models/
+    routes/
+    server.js
+    package.json
+    .env.example
+
+  frontend/
+    public/
+    src/
+      components/
+      context/
+      services/
+      App.js
+      index.js
+    package.json
+    .env.example
+
+  README.md
+
+Setup Instructions (Local Development)
+1. Clone the repository
+git clone https://github.com/Eeshatwayi/CHAT_APPLICATION.git
+cd CHAT_APPLICATION
+
+2. Backend Setup
 cd backend
-
-# Install dependencies
 npm install
 
-# Create .env file
-touch .env
-```
 
-Add the following to your `.env` file:
-```env
+Create a new .env file inside the backend folder (based on .env.example):
+
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/chatapp
-JWT_SECRET=your_super_secret_jwt_key_here_change_this
-NODE_ENV=development
-CLIENT_URL=http://localhost:3000
-```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+EMAIL_USER=your_email
+EMAIL_PASSWORD=your_email_app_password
 
-**For MongoDB Atlas (Cloud Database):**
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/chatapp?retryWrites=true&w=majority
-```
 
-### 3. Frontend Setup
+Run the backend:
 
-```bash
-# Navigate to frontend directory (from root)
+npm start
+
+
+The backend will start at:
+
+http://localhost:5000
+
+3. Frontend Setup
+
+Open a new terminal:
+
 cd frontend
-
-# Install dependencies
 npm install
 
-# Create .env file
-touch .env
-```
 
-Add the following to your frontend `.env` file:
-```env
+Create a .env file inside the frontend folder (based on .env.example):
+
 REACT_APP_API_URL=http://localhost:5000
 REACT_APP_SOCKET_URL=http://localhost:5000
-```
 
-### 4. Database Setup
 
-**Option A: Local MongoDB**
-```bash
-# Start MongoDB service
-# For Windows:
-net start MongoDB
+Start the frontend:
 
-# For macOS (using Homebrew):
-brew services start mongodb-community
-
-# For Linux:
-sudo systemctl start mongod
-```
-
-**Option B: MongoDB Atlas**
-1. Create account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Create a cluster
-3. Get your connection string
-4. Add to backend `.env` file
-
-##  Running the Application
-
-### Start Backend Server
-
-```bash
-# From backend directory
-cd backend
 npm start
 
-# Or for development with auto-reload:
-npm run dev
-```
 
-Server will run on `http://localhost:5000`
+The app will run at:
 
-### Start Frontend Application
+http://localhost:3000
 
-```bash
-# From frontend directory (open new terminal)
-cd frontend
-npm start
-```
+Notes
 
-Application will open automatically at `http://localhost:3000`
+Users must create their own .env files in both backend and frontend.
 
-##  Project Structure
+If using MongoDB Atlas, update the backend .env MONGODB_URI accordingly.
 
-```
-chat-application/
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── messageController.js
-│   │   └── roomController.js
-│   ├── middleware/
-│   │   └── authMiddleware.js
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Message.js
-│   │   └── Room.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── messageRoutes.js
-│   │   └── roomRoutes.js
-│   ├── uploads/
-│   ├── socket/
-│   │   └── socketHandler.js
-│   ├── .env
-│   ├── server.js
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Auth/
-│   │   │   ├── Chat/
-│   │   │   ├── Rooms/
-│   │   │   └── Common/
-│   │   ├── contexts/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   ├── App.js
-│   │   └── index.js
-│   ├── .env
-│   └── package.json
-└── README.md
-```
+File uploads depend on browser support. When downloading files, some media may not decode properly due to browser-side limitations.
 
-##  Environment Variables
+Private rooms require sharing the room code manually with other users.
 
-### Backend (.env)
-| Variable | Description | Example |
-|----------|-------------|---------|
-| PORT | Backend server port | 5000 |
-| MONGODB_URI | MongoDB connection string | mongodb://localhost:27017/chatapp |
-| JWT_SECRET | Secret key for JWT | your_secret_key |
-| NODE_ENV | Environment mode | development |
-| CLIENT_URL | Frontend URL for CORS | http://localhost:3000 |
+Limitations / Drawbacks
 
-### Frontend (.env)
-| Variable | Description | Example |
-|----------|-------------|---------|
-| REACT_APP_API_URL | Backend API URL | http://localhost:5000 |
-| REACT_APP_SOCKET_URL | WebSocket server URL | http://localhost:5000 |
+Two private rooms cannot have the same name for a single user, as room names are unique in the database.
 
-##  Usage
+File uploads depend on how each browser handles media encoding and decoding.
 
-1. **Register/Login**: Create a new account or login with existing credentials
-2. **Create Room**: Click "New Room" to create a chat room
-3. **Join Room**: Browse and join existing public rooms
-4. **Private Chat**: Start a private conversation with any user
-5. **Send Messages**: Type and send text messages in real-time
-6. **Share Media**: Click the attachment icon to share images/files
-7. **View History**: Scroll up to view previous messages from database
+When downloading files shared in chat, certain formats may not decrypt or open correctly depending on browser behavior.
 
-##  Testing
+Cloudinary free tier limits file size, bandwidth, and upload frequency.
 
-```bash
-# Backend tests
-cd backend
-npm test
+Real-World Relevance
 
-# Frontend tests
-cd frontend
-npm test
-```
+This project reflects concepts used in applications like Slack, WhatsApp, and Microsoft Teams, such as real-time communication, room-based messaging, authentication, and file sharing.
 
-##  Troubleshooting
+License
 
-**MongoDB Connection Error:**
-- Ensure MongoDB service is running
-- Check connection string in `.env` file
-- For Atlas, check network access settings
-
-**Socket Connection Failed:**
-- Verify backend server is running
-- Check CORS settings in backend
-- Ensure socket URL matches in frontend `.env`
-
-**Port Already in Use:**
-```bash
-# Find and kill process on port 5000
-# Windows:
-netstat -ano | findstr :5000
-taskkill /PID <PID> /F
-
-# macOS/Linux:
-lsof -ti:5000 | xargs kill -9
-```
-
-##  Deployment
-
-### Backend (Render/Railway/Heroku)
-1. Push code to GitHub
-2. Connect repository to hosting service
-3. Add environment variables
-4. Deploy
-
-### Frontend (Vercel/Netlify)
-1. Push code to GitHub
-2. Connect repository
-3. Add build command: `npm run build`
-4. Add environment variables
-5. Deploy
-
-### Database (MongoDB Atlas)
-- Already cloud-based, just update connection string
-
-##  API Documentation
-
-### Authentication Endpoints
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
-
-### Message Endpoints
-- `GET /api/messages/:roomId` - Get room messages
-- `POST /api/messages` - Send message
-- `POST /api/messages/upload` - Upload media
-
-### Room Endpoints
-- `GET /api/rooms` - Get all rooms
-- `POST /api/rooms` - Create room
-- `GET /api/rooms/:id` - Get room details
-
-##  Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-##  License
-
-This project is licensed under the MIT License.
-
-##  Author
-
-(https://github.com/Eeshatwayi)
-
-##  Acknowledgments
-
-- Real-world inspiration: Slack, WhatsApp, Microsoft Teams
-- Socket.io documentation
-- MERN stack community
-
----
-
-**Note**: This is an educational project created for assignment purposes.
+This project was created for academic and learning purposes.

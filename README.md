@@ -2,7 +2,7 @@
 
 A full-stack real-time chat application built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring WebSocket communication for instant messaging, chat rooms, and media sharing capabilities.
 
-## 🚀 Features
+##  Features
 
 - **Real-time Messaging**: Instant message delivery using WebSockets (Socket.io)
 - **Chat Rooms**: Create and join different chat rooms for group conversations
@@ -12,7 +12,7 @@ A full-stack real-time chat application built with the MERN stack (MongoDB, Expr
 - **User Authentication**: Secure login and registration system
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 **Frontend:**
 - React.js (v18.2.0)
@@ -32,7 +32,7 @@ A full-stack real-time chat application built with the MERN stack (MongoDB, Expr
 - JSON Web Tokens (JWT)
 - bcrypt.js
 
-## 📋 Prerequisites
+##  Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
@@ -125,7 +125,7 @@ sudo systemctl start mongod
 3. Get your connection string
 4. Add to backend `.env` file
 
-## 🚀 Running the Application
+##  Running the Application
 
 ### Start Backend Server
 
@@ -150,7 +150,7 @@ npm start
 
 Application will open automatically at `http://localhost:3000`
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 chat-application/
@@ -195,7 +195,7 @@ chat-application/
 └── README.md
 ```
 
-## 🔑 Environment Variables
+##  Environment Variables
 
 ### Backend (.env)
 | Variable | Description | Example |
@@ -212,7 +212,7 @@ chat-application/
 | REACT_APP_API_URL | Backend API URL | http://localhost:5000 |
 | REACT_APP_SOCKET_URL | WebSocket server URL | http://localhost:5000 |
 
-## 📱 Usage
+##  Usage
 
 1. **Register/Login**: Create a new account or login with existing credentials
 2. **Create Room**: Click "New Room" to create a chat room
@@ -222,7 +222,7 @@ chat-application/
 6. **Share Media**: Click the attachment icon to share images/files
 7. **View History**: Scroll up to view previous messages from database
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 # Backend tests
@@ -234,7 +234,7 @@ cd frontend
 npm test
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 **MongoDB Connection Error:**
 - Ensure MongoDB service is running
@@ -257,7 +257,7 @@ taskkill /PID <PID> /F
 lsof -ti:5000 | xargs kill -9
 ```
 
-## 🚀 Deployment
+##  Deployment
 
 ### Backend (Render/Railway/Heroku)
 1. Push code to GitHub
@@ -275,7 +275,7 @@ lsof -ti:5000 | xargs kill -9
 ### Database (MongoDB Atlas)
 - Already cloud-based, just update connection string
 
-## 📄 API Documentation
+##  API Documentation
 
 ### Authentication Endpoints
 - `POST /api/auth/register` - Register new user
@@ -292,19 +292,19 @@ lsof -ti:5000 | xargs kill -9
 - `POST /api/rooms` - Create room
 - `GET /api/rooms/:id` - Get room details
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📝 License
+##  License
 
 This project is licensed under the MIT License.
 
-## 👨‍💻 Author
+##  Author
 
-Your Name - [Your GitHub](https://github.com/yourusername)
+(https://github.com/Eeshatwayi)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Real-world inspiration: Slack, WhatsApp, Microsoft Teams
 - Socket.io documentation

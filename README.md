@@ -1,63 +1,67 @@
-Real-Time Chat Application
-This project is a real-time chat application built using the MERN stack (MongoDB, Express.js, React, and Node.js) along with Socket.IO for instant communication.
-It supports public chat rooms, private rooms with access codes, file and image sharing, and secure user authentication.
-Both backend and frontend are organized as separate applications inside the same project folder.
+# **Real-Time Chat Application**
 
-Features
-Real-Time Messaging
+This project is a real-time chat application developed using the MERN stack (MongoDB, Express.js, React, Node.js) with Socket.IO for instant communication.
+It supports public and private chat rooms, media sharing, authentication, and persistent chat history.
+The backend and frontend are organized separately within the same project.
 
-Messages are delivered instantly using WebSockets without refreshing the page.
+---
 
-Public Chat Rooms
+## **Features**
 
-Users can join any public room immediately and start chatting.
+### **Real-Time Messaging**
 
-Private Rooms with Codes
+Messages are delivered instantly using WebSockets without requiring page refresh.
+
+### **Public Chat Rooms**
+
+Users can freely join any public room.
+
+### **Private Rooms with Access Codes**
 
 Users can create private rooms that generate a unique 6-character code.
-Anyone who has this code can join the room.
+Anyone with the code can join the room.
 
-Media Sharing
+### **Media & File Sharing**
 
-Users can upload and send images or files.
-Uploaded media is stored using Cloudinary.
+Images and files can be uploaded and sent in chats.
+Media is stored using Cloudinary.
 
-Message History
+### **Persistent Chat History**
 
-All chat messages are stored in MongoDB and can be viewed later.
+All messages are stored in MongoDB and can be viewed later.
 
-Authentication
+### **User Authentication**
 
-Registration and login are implemented using JWT-based authentication.
+JWT-based secure signup and login functionality.
 
-Responsive UI
+### **Responsive UI**
 
-The frontend layout adapts smoothly to desktop, tablet, and mobile screens.
+The interface adjusts smoothly across desktops, tablets, and mobile screens.
 
-Tech Stack
-Frontend
+---
 
-React.js
+## **Tech Stack**
 
-Axios
+### **Frontend**
 
-Socket.IO Client
+* React.js
+* Axios
+* Socket.IO Client
+* CSS
 
-CSS
+### **Backend**
 
-Backend
+* Node.js
+* Express.js
+* MongoDB with Mongoose
+* Socket.IO
+* Cloudinary
 
-Node.js
+---
 
-Express.js
+## **Project Structure**
 
-MongoDB + Mongoose
-
-Socket.IO
-
-Cloudinary (for media uploads)
-
-Project Structure
+```
 chat_assignment/
   backend/
     config/
@@ -81,85 +85,114 @@ chat_assignment/
     .env.example
 
   README.md
+```
 
-Setup Instructions (Local Development)
-1. Clone the repository
+---
+
+## **Setup Instructions (Local Development)**
+
+### **1. Clone the Repository**
+
+```
 git clone https://github.com/Eeshatwayi/CHAT_APPLICATION.git
 cd CHAT_APPLICATION
+```
 
-2. Backend Setup
+---
+
+## **2. Backend Setup**
+
+### Install dependencies:
+
+```
 cd backend
 npm install
+```
 
+### Create `.env` file (based on `.env.example`):
 
-Create a new .env file inside the backend folder (based on .env.example):
-
+```
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 EMAIL_USER=your_email
 EMAIL_PASSWORD=your_email_app_password
+```
 
+### Start the backend:
 
-Run the backend:
-
+```
 npm start
+```
 
+Backend will run at:
 
-The backend will start at:
-
+```
 http://localhost:5000
+```
 
-3. Frontend Setup
+---
+
+## **3. Frontend Setup**
 
 Open a new terminal:
 
+### Install dependencies:
+
+```
 cd frontend
 npm install
+```
 
+### Create `.env` file (based on `.env.example`):
 
-Create a .env file inside the frontend folder (based on .env.example):
-
+```
 REACT_APP_API_URL=http://localhost:5000
 REACT_APP_SOCKET_URL=http://localhost:5000
+```
 
+### Start the frontend:
 
-Start the frontend:
-
+```
 npm start
+```
 
+Frontend will run at:
 
-The app will run at:
-
+```
 http://localhost:3000
+```
 
-Notes
+---
 
-Users must create their own .env files in both backend and frontend.
+## **Notes**
 
-If using MongoDB Atlas, update the backend .env MONGODB_URI accordingly.
+* You must manually create `.env` files in both backend and frontend.
+* If using MongoDB Atlas, update the backend `.env` MONGODB_URI accordingly.
+* File uploads behave differently depending on browser handling; downloaded files may not decode properly in some cases.
+* Private rooms require users to share the generated 6-character code.
 
-File uploads depend on browser support. When downloading files, some media may not decode properly due to browser-side limitations.
+---
 
-Private rooms require sharing the room code manually with other users.
+## **Drawbacks / Limitations**
 
-Limitations / Drawbacks
+* Private rooms cannot share the same name because room names are unique in the database.
+* File decryption or decoding depends on the recipient’s browser; certain downloads may not open correctly.
+* Cloudinary free tier limits file size and bandwidth.
 
-Two private rooms cannot have the same name for a single user, as room names are unique in the database.
+---
 
-File uploads depend on how each browser handles media encoding and decoding.
+## **Real-World Relevance**
 
-When downloading files shared in chat, certain formats may not decrypt or open correctly depending on browser behavior.
+This project demonstrates concepts used in popular communication tools like Slack, WhatsApp, and Microsoft Teams, such as real-time messaging, chat rooms, authentication, and media sharing.
 
-Cloudinary free tier limits file size, bandwidth, and upload frequency.
+---
 
-Real-World Relevance
+## **License**
 
-This project reflects concepts used in applications like Slack, WhatsApp, and Microsoft Teams, such as real-time communication, room-based messaging, authentication, and file sharing.
+This project is created for academic and learning purposes.
 
-License
-
-This project was created for academic and learning purposes.
+--

@@ -5,6 +5,8 @@ import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './components/Layout/PrivateRoute';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import ForgotPassword from './components/Auth/ForgotPassword';  // ADD THIS
+import ResetPassword from './components/Auth/ResetPassword';    // ADD THIS
 import ChatRoom from './components/Chat/ChatRoom';
 import './App.css';
 
@@ -18,6 +20,8 @@ function App() {
             <Route path="/" element={<Navigate to="/chat" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />     {/* ADD THIS */}
+            <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* ADD THIS */}
             <Route 
               path="/chat" 
               element={

@@ -24,6 +24,9 @@ const messageSchema = new mongoose.Schema({
     enum: ['image', 'file', 'none'],
     default: 'none'
   },
+  fileName: {
+    type: String
+  },
   createdAt: {
     type: Date,
     default: Date.now

@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
+const roomRoutes = require('./routes/roomRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 const Message = require('./models/message');
 const Room = require('./models/room');
 const User = require('./models/user');
@@ -21,16 +23,22 @@ const io = socketIo(server, {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
-
-// Routes
-app.use('/api/auth', authRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Backend is working!', mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected' });
 });
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/rooms', roomRoutes);
+app.use('/api/upload', uploadRoutes);
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB Connected'))
@@ -81,14 +89,15 @@ io.on('connection', async (socket) => {
 
   // Send message
   socket.on('send-message', async (data) => {
-    try {
-      const message = new Message({
-        room: data.room,
-        sender: socket.userId,
-        content: data.content,
-        fileUrl: data.fileUrl,
-        fileType: data.fileType
-      });
+  try {
+    const message = new Message({
+      room: data.room,
+      sender: socket.userId,
+      content: data.content,
+      fileUrl: data.fileUrl,
+      fileType: data.fileType,
+      fileName: data.fileName
+    });
       
       await message.save();
       const populatedMessage = await Message.findById(message._id)
@@ -108,36 +117,21 @@ io.on('connection', async (socket) => {
     });
   });
 
+  // Leave room
+  socket.on('leave-room', (roomName) => {
+    socket.leave(roomName);
+    console.log(`${user.username} left room: ${roomName}`);
+    
+    socket.to(roomName).emit('user-left', {
+      username: user.username,
+      message: `${user.username} left the room`
+    });
+  });
+
   // Disconnect
   socket.on('disconnect', () => {
     console.log('👋 User disconnected:', socket.userId);
   });
-});
-
-// API Routes for rooms
-app.get('/api/rooms', async (req, res) => {
-  try {
-    const rooms = await Room.find({ type: 'public' })
-      .populate('createdBy', 'username');
-    res.json(rooms);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-app.post('/api/rooms', async (req, res) => {
-  try {
-    const { name, type } = req.body;
-    const room = new Room({
-      name,
-      type,
-      createdBy: req.userId
-    });
-    await room.save();
-    res.status(201).json(room);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 });
 
 const PORT = process.env.PORT || 5000;
